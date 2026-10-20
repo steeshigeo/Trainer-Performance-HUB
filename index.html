@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digimap East Region - Professional Training Dashboard</title>
+    <title>Digimap East Region - Comprehensive OPS, EMS & PNR Dashboard</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,7 +14,7 @@
                     colors: {
                         glass: {
                             dark: 'rgba(15, 23, 42, 0.9)',
-                            card: 'rgba(30, 41, 59, 0.7)'
+                            panel: 'rgba(30, 41, 59, 0.75)'
                         }
                     }
                 }
@@ -22,7 +22,7 @@
         }
     </script>
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -38,338 +38,362 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- TOP EXECUTIVE HEADER -->
+    <!-- TOP NAVIGATION & HEADER -->
     <header class="h-16 bg-slate-900/80 glass-panel border-b border-slate-800/80 px-6 flex items-center justify-between sticky top-0 z-40">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/20">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/20">
                 DG
             </div>
             <div>
-                <h1 class="font-bold text-sm tracking-tight text-slate-100">Dashboard Training East Region</h1>
-                <p class="text-[11px] text-slate-400">Open Studio & Operational Performance Summary</p>
+                <h1 class="font-bold text-sm tracking-tight text-slate-100">Digimap East Region Training Dashboard</h1>
+                <p class="text-[11px] text-slate-400">Integrated Open Studio (OPS), EMS Coaching & PNR Tracker</p>
             </div>
         </div>
 
-        <!-- Interactive Switcher -->
+        <!-- Global Selectors -->
         <div class="flex items-center gap-3">
             <div class="flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 shadow-inner">
-                <i data-lucide="user-cog" class="w-3.5 h-3.5 text-blue-400"></i>
-                <label for="trainer-select" class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Trainer:</label>
-                <select id="trainer-select" onchange="switchTrainerProfile()" class="bg-transparent text-xs font-bold text-slate-200 focus:outline-none cursor-pointer">
-                    <option value="dinda" class="bg-slate-900">Dinda Audina (M116 Beachwalk)</option>
-                    <option value="amanda" class="bg-slate-900">Amanda Amelia (M236 Palu Grand Mall)</option>
+                <i data-lucide="store" class="w-3.5 h-3.5 text-blue-400"></i>
+                <label for="store-select" class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Store:</label>
+                <select id="store-select" onchange="syncDashboardData()" class="bg-transparent text-xs font-bold text-slate-200 focus:outline-none cursor-pointer">
+                    <option value="M116" class="bg-slate-900">M116 Digimap Beachwalk Bali</option>
+                    <option value="M121" class="bg-slate-900">M121 Digimap Tunjungan Plaza 3</option>
+                    <option value="M122" class="bg-slate-900">M122 Digimap Galaxy Mall Surabaya</option>
+                    <option value="M258" class="bg-slate-900">M258 Digimap Lippo Plaza Manado</option>
+                </select>
+            </div>
+
+            <div class="flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 shadow-inner">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i>
+                <select id="month-select" onchange="syncDashboardData()" class="bg-transparent text-xs font-bold text-slate-200 focus:outline-none cursor-pointer">
+                    <option value="OKTOBER" class="bg-slate-900">Oktober 2026</option>
+                    <option value="SEPTEMBER" class="bg-slate-900">September 2026</option>
+                    <option value="AGUSTUS" class="bg-slate-900">Agustus 2026</option>
                 </select>
             </div>
         </div>
     </header>
 
+    <!-- MODULE NAVIGATION TABS -->
+    <nav class="bg-slate-900/60 border-b border-slate-800/80 px-6 py-2.5 flex items-center justify-between sticky top-16 z-30 glass-panel">
+        <div class="flex gap-2">
+            <button onclick="switchTab('ops')" id="tab-btn-ops" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/30">
+                <i data-lucide="presentation" class="w-4 h-4"></i> Open Studio (OPS)
+            </button>
+            <button onclick="switchTab('ems')" id="tab-btn-ems" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                <i data-lucide="award" class="w-4 h-4"></i> EMS Coaching Log
+            </button>
+            <button onclick="switchTab('pnr')" id="tab-btn-pnr" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                <i data-lucide="book-open-check" class="w-4 h-4"></i> Plan & Review (PNR)
+            </button>
+        </div>
+
+        <div id="trainer-badge-container" class="text-xs flex items-center gap-2 text-slate-300 bg-slate-800/50 px-3 py-1 rounded-lg border border-slate-700/60">
+            <span class="text-slate-500 font-medium">Store Trainer:</span>
+            <strong id="header-trainer-name" class="text-blue-400">Dinda Audina</strong>
+        </div>
+    </nav>
+
     <!-- MAIN DASHBOARD CONTENT -->
     <main class="flex-1 p-6 space-y-6 max-w-[1750px] mx-auto w-full">
 
-        <!-- UPPER SECTION: TRAINER BIO & MONTHLY ACTIVITY TARGET -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-            <!-- TRAINER PROFILE CARD (Left: Span 4) -->
-            <div class="lg:col-span-4 bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden flex flex-col justify-between">
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-widest">
-                            Store Trainer Profile
-                        </span>
-                        <span id="card-type-store" class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                            APR
-                        </span>
-                    </div>
-
-                    <div class="flex items-center gap-4 pt-2">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-700 flex items-center justify-center font-bold text-xl text-blue-400 border border-slate-700 shadow-inner shrink-0">
-                            <i data-lucide="award" class="w-7 h-7"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h2 id="card-employee-name" class="text-base font-bold text-white truncate">Dinda Audina</h2>
-                            <p id="card-store-name" class="text-xs text-slate-400 truncate">M116 Digimap Beachwalk Bali</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800 text-xs">
-                        <div class="bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 block font-medium">NIK</span>
-                            <strong id="card-nik" class="text-slate-200 text-xs">23005222</strong>
-                        </div>
-                        <div class="bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 block font-medium">Total Employee</span>
-                            <strong id="card-total-employee" class="text-emerald-400 text-xs">8 Orang</strong>
-                        </div>
-                        <div class="col-span-2 bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 block font-medium">Work Experience</span>
-                            <strong id="card-work-exp" class="text-slate-200 text-xs">3 Tahun 7 Bulan 18 Hari</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- OPEN STUDIO TARGET & PROGRESS SUMMARY (Right: Span 8) -->
-            <div class="lg:col-span-8 bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl flex flex-col justify-between">
+        <!-- METRIC SUMMARY KPI CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-slate-900/70 glass-panel p-5 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="p-2.5 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                                <i data-lucide="target" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">Open Studio - Target Activity Monthly</h3>
-                                <p class="text-xs text-slate-400">Akumulasi progress pencapaian aktivitas pelatihan bulanan</p>
-                            </div>
-                        </div>
-                        <span id="card-pct-badge" class="text-xl font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-2xl shadow-lg">
-                            75%
-                        </span>
-                    </div>
-
-                    <!-- Progress Bar Component -->
-                    <div class="space-y-2 my-5">
-                        <div class="flex justify-between text-xs font-semibold">
-                            <span class="text-slate-400">Current Progress: <strong id="card-current-progress" class="text-white text-sm">60</strong> Activity</span>
-                            <span class="text-slate-400">Target Monthly: <strong id="card-target-monthly" class="text-slate-200 text-sm">80</strong> Activity</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden p-0.5 border border-slate-700/50 shadow-inner">
-                            <div id="card-progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-1000 shadow-md" style="width: 75%;"></div>
-                        </div>
-                    </div>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Sesi OPS</p>
+                    <h3 id="kpi-ops-session" class="text-2xl font-black text-blue-400 mt-1">60 Sesi</h3>
+                    <p class="text-[10px] text-emerald-400 font-medium mt-0.5">Progress: 75% Target</p>
                 </div>
-
-                <!-- Bottom Metric Boxes -->
-                <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800 text-center">
-                    <div class="bg-slate-800/50 p-3.5 rounded-2xl border border-slate-800">
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Target Monthly</span>
-                        <p id="metric-target" class="text-xl font-bold text-slate-200 mt-1">80</p>
-                    </div>
-                    <div class="bg-slate-800/50 p-3.5 rounded-2xl border border-slate-800">
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Current Progress</span>
-                        <p id="metric-progress" class="text-xl font-bold text-blue-400 mt-1">60</p>
-                    </div>
-                    <div class="bg-slate-800/50 p-3.5 rounded-2xl border border-slate-800">
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Achievement (%)</span>
-                        <p id="metric-pct" class="text-xl font-bold text-emerald-400 mt-1">75%</p>
-                    </div>
+                <div class="p-3 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20">
+                    <i data-lucide="users" class="w-6 h-6"></i>
                 </div>
             </div>
 
+            <div class="bg-slate-900/70 glass-panel p-5 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Produk Paling Diminati</p>
+                    <h3 id="kpi-top-product" class="text-2xl font-black text-emerald-400 mt-1">iPhone</h3>
+                    <p class="text-[10px] text-slate-400 font-medium mt-0.5">Unit Terjual: 18 Unit</p>
+                </div>
+                <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+                    <i data-lucide="smartphone" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/70 glass-panel p-5 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Rata-rata Skor EMS</p>
+                    <h3 id="kpi-ems-score" class="text-2xl font-black text-indigo-400 mt-1">89.5 Pts</h3>
+                    <p class="text-[10px] text-emerald-400 font-medium mt-0.5">Kategori: Sangat Baik</p>
+                </div>
+                <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                    <i data-lucide="award" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/70 glass-panel p-5 rounded-2xl border border-slate-800 shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Jam Training PNR</p>
+                    <h3 id="kpi-pnr-hours" class="text-2xl font-black text-amber-400 mt-1">12 Jam</h3>
+                    <p class="text-[10px] text-amber-400 font-medium mt-0.5">Min Target: 12 Hours</p>
+                </div>
+                <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                    <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+            </div>
         </div>
 
-        <!-- LOWER SECTION: DETAILED DAILY MATRIX TABLE (01 - 31) -->
-        <div class="bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl space-y-4">
-            
-            <div class="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        <i data-lucide="calendar-days" class="w-4 h-4"></i>
-                    </div>
+        <!-- MODULE TAB 1: OPEN STUDIO (OPS) -->
+        <section id="module-ops" class="module-pane space-y-6">
+            <div class="bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
                     <div>
-                        <h3 class="font-bold text-sm text-white">Rincian Kehadiran & Aktivitas Staff per Tanggal</h3>
-                        <p class="text-xs text-slate-400">Matriks harian open studio dari tanggal 01 sampai 31 beserta email SEED & pengalaman kerja</p>
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i data-lucide="presentation" class="w-4 h-4 text-blue-400"></i> Log Aktivitas Open Studio (OPS)
+                        </h3>
+                        <p class="text-xs text-slate-400">Data presenter, jumlah peserta, topik Open Studio, dan produk yang diminati pelanggan</p>
                     </div>
-                </div>
-                
-                <div class="flex items-center gap-3 w-full sm:w-auto">
                     <div class="relative w-full sm:w-72">
                         <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500"></i>
-                        <input type="text" id="staff-search-input" oninput="filterStaffMatrix()" placeholder="Cari nama staff / posisi..." class="w-full bg-slate-800/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-200">
+                        <input type="text" oninput="filterTable('ops-tbody', this.value)" placeholder="Cari presenter, topik, atau produk..." class="w-full bg-slate-800/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-200">
                     </div>
                 </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-slate-800/60 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800">
+                                <th class="p-3">Timestamp</th>
+                                <th class="p-3">Presenter Name</th>
+                                <th class="p-3">Store</th>
+                                <th class="p-3">Open Studio Topics</th>
+                                <th class="p-3 text-center">Sessions</th>
+                                <th class="p-3 text-center">Total Participants</th>
+                                <th class="p-3 text-center">Unit Terjual</th>
+                                <th class="p-3">Produk Diminati</th>
+                                <th class="p-3">Tanggal Pelaksanaan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ops-tbody" class="divide-y divide-slate-800/60 font-medium">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </section>
 
-            <!-- Scrollable Table Matrix -->
-            <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-inner">
-                <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
-                    <thead>
-                        <!-- Day of Week Row -->
-                        <tr class="bg-slate-900/90 text-slate-400 text-[10px] uppercase font-semibold border-b border-slate-800">
-                            <th class="p-2.5 sticky left-0 bg-slate-900 z-20 text-center w-10">No</th>
-                            <th class="p-2.5 sticky left-10 bg-slate-900 z-20 min-w-[170px]">Store</th>
-                            <th class="p-2.5 sticky left-[210px] bg-slate-900 z-20 min-w-[150px]">Nama</th>
-                            <th class="p-2.5 min-w-[90px]">NIK</th>
-                            <th class="p-2.5 min-w-[140px]">Work Experience</th>
-                            <th class="p-2.5 min-w-[180px]">SEED Email</th>
-                            <th class="p-2.5 min-w-[120px] border-r border-slate-800">Positions</th>
+        <!-- MODULE TAB 2: EMS COACHING LOG -->
+        <section id="module-ems" class="module-pane hidden space-y-6">
+            <div class="bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
+                    <div>
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i data-lucide="award" class="w-4 h-4 text-indigo-400"></i> Log Assessment & Evaluasi EMS Coaching
+                        </h3>
+                        <p class="text-xs text-slate-400">Catatan coaching antar staf, topik demonstrasi produk, penilaian skor, serta umpan balik</p>
+                    </div>
+                    <div class="relative w-full sm:w-72">
+                        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500"></i>
+                        <input type="text" oninput="filterTable('ems-tbody', this.value)" placeholder="Cari nama staf, topik, atau skor..." class="w-full bg-slate-800/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-200">
+                    </div>
+                </div>
 
-                            <!-- 31 Days Header -->
-                            <th class="p-2 text-center w-9 bg-slate-900">Sab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Min</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sen</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sel</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Rab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Kam</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Jum</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Min</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sen</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sel</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Rab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Kam</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Jum</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Min</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sen</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sel</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Rab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Kam</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Jum</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Min</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sen</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sel</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Rab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Kam</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Jum</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sab</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Min</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sen</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Sel</th>
-                            <th class="p-2 text-center w-9 bg-slate-900">Rab</th>
-
-                            <th class="p-3 text-center min-w-[70px] bg-slate-800/90 text-blue-400 font-bold border-l border-slate-700">Total</th>
-                        </tr>
-                        <!-- Date Number Row (01 - 31) -->
-                        <tr class="bg-slate-900/60 text-slate-300 text-[11px] font-bold border-b border-slate-800">
-                            <th class="p-2 sticky left-0 bg-slate-900 z-20"></th>
-                            <th class="p-2 sticky left-10 bg-slate-900 z-20"></th>
-                            <th class="p-2 sticky left-[210px] bg-slate-900 z-20"></th>
-                            <th class="p-2"></th>
-                            <th class="p-2"></th>
-                            <th class="p-2"></th>
-                            <th class="p-2 border-r border-slate-800"></th>
-
-                            <script>
-                                for(let d=1; d<=31; d++) {
-                                    let ds = d < 10 ? '0'+d : d;
-                                    document.write(`<th class="p-2 text-center border-l border-slate-800/40 text-slate-400">${ds}</th>`);
-                                }
-                            </script>
-                            <th class="p-2 text-center bg-slate-800/90 border-l border-slate-700"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="matrix-tbody" class="divide-y divide-slate-800/60 font-medium">
-                        <!-- Populated dynamically via JS -->
-                    </tbody>
-                </table>
+                <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-slate-800/60 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800">
+                                <th class="p-3">Timestamp</th>
+                                <th class="p-3">Store</th>
+                                <th class="p-3">Trainer Name</th>
+                                <th class="p-3">Participants Name</th>
+                                <th class="p-3">Topic</th>
+                                <th class="p-3 text-center">Score</th>
+                                <th class="p-3 min-w-[250px]">Any Comment (Evaluasi Trainer)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ems-tbody" class="divide-y divide-slate-800/60 font-medium">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </section>
 
-        </div>
+        <!-- MODULE TAB 3: PLAN & REVIEW (PNR) -->
+        <section id="module-pnr" class="module-pane hidden space-y-6">
+            <div class="bg-slate-900/70 glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-2xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
+                    <div>
+                        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                            <i data-lucide="book-open-check" class="w-4 h-4 text-amber-400"></i> Plan and Review (PNR) Session Tracker
+                        </h3>
+                        <p class="text-xs text-slate-400">Sesi training internal, modul yang diajarkan, status eksekusi (Planning/Delivered), serta pre/post quiz score</p>
+                    </div>
+                    <div class="relative w-full sm:w-72">
+                        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500"></i>
+                        <input type="text" oninput="filterTable('pnr-tbody', this.value)" placeholder="Cari modul, status, atau peserta..." class="w-full bg-slate-800/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 text-slate-200">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-slate-800/60 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800">
+                                <th class="p-3">Timestamp</th>
+                                <th class="p-3">Location Training</th>
+                                <th class="p-3">Trainer Name</th>
+                                <th class="p-3">Participants Name</th>
+                                <th class="p-3">Modules / Topic</th>
+                                <th class="p-3">Type Training</th>
+                                <th class="p-3 text-center">Status</th>
+                                <th class="p-3 text-center">Pre-Quiz</th>
+                                <th class="p-3 text-center">Post-Quiz</th>
+                                <th class="p-3 text-center">Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pnr-tbody" class="divide-y divide-slate-800/60 font-medium">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- PROFESSIONAL JAVASCRIPT LOGIC -->
+    <!-- PROFESSIONAL JAVASCRIPT ENGINE -->
     <script>
-        // Initialize Lucide Icons
+        // Init Lucide
         lucide.createIcons();
 
-        // Comprehensive Dataset replicating the Google Sheet exact records
-        const trainersDatabase = {
-            dinda: {
-                employeeName: "Dinda Audina",
-                store: "M116 Digimap Beachwalk Bali",
-                typeStore: "APR",
-                nik: "23005222",
-                workExperience: "3 Tahun 7 Bulan 18 Hari",
-                totalEmployee: 8,
-                targetMonthly: 80,
-                currentProgress: 60,
-                pct: "75%",
-                staffList: [
-                    { no: 1, store: "M116 Beachwalk", name: "Muhammad Fachrizal Adam", nik: "25003371", exp: "1 Thn 8 Bln 2 Hr", email: "muhammadfachrizaladam@gmail.com", pos: "Supervisor", dates: Array(31).fill(0), total: 0 },
-                    { no: 2, store: "M116 Beachwalk", name: "Dinda Audina", nik: "23005222", exp: "3 Thn 7 Bln 18 Hr", email: "dindaaudina.digimap@gmail.com", pos: "Store Trainer (Pt)", dates: Array(31).fill(0), total: 0 },
-                    { no: 3, store: "M116 Beachwalk", name: "I Nyoman Angga Aditya", nik: "23007058", exp: "3 Thn 7 Bln 4 Hr", email: "anggaaditya.digimap@gmail.com", pos: "Cashier", dates: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4], total: 5 },
-                    { no: 4, store: "M116 Beachwalk", name: "I Gusti Ayu Dwi Antari", nik: "26031619", exp: "5 Thn 6 Bln 7 Hr", email: "ayudwi.digimap@gmail.com", pos: "Cashier", dates: [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0], total: 3 },
-                    { no: 5, store: "M116 Beachwalk", name: "Rasya Dwi Irfansyah", nik: "25018857", exp: "Empty", email: "rasya.digimap@gmail.com", pos: "Sales Staff", dates: Array(31).fill(0), total: 0 }
+        // Database extracted verbatim from the user's provided sheets (OPS, EMS, PNR & Pemadanan Static)
+        const regionDatabase = {
+            M116: {
+                trainer: "Dinda Audina",
+                storeName: "M116 Digimap Beachwalk Bali",
+                kpi: { ops: "60 Sesi", topProduct: "iPhone", ems: "88.0 Pts", pnr: "12 Jam" },
+                opsList: [
+                    { time: "01/09/2026 12:53:25", presenter: "Gading Resta Octavia", store: "M116 Beachwalk", topic: "Preview App", sessions: "13:00", pax: 1, unit: 1, product: "iPad", date: "01 September 2026" },
+                    { time: "02/09/2026 15:30:10", presenter: "Dinda Audina", store: "M116 Beachwalk", topic: "Smart Script", sessions: "15:00", pax: 3, unit: 1, product: "iPhone", date: "02 September 2026" },
+                    { time: "05/09/2026 18:10:00", presenter: "I Nyoman Angga Aditya", store: "M116 Beachwalk", topic: "Notifications on Apple Watch", sessions: "18:00", pax: 2, unit: 0, product: "Apple Watch", date: "05 September 2026" }
+                ],
+                emsList: [
+                    { time: "14/04/2026 21:14:45", store: "M116 Beachwalk", trainer: "Widya Putri Kirana", participant: "Tania", topic: "Demo Mac", score: 90, comment: "Pengenalan produk dilakukan dengan baik, demonstrasi produk memadai, artikulasi jelas." },
+                    { time: "16/04/2026 10:11:33", store: "M116 Beachwalk", trainer: "Dinda Audina", participant: "I Nyoman Angga Aditya", topic: "Demo Apple Watch", score: 80, comment: "Kurang lancar dalam membuat benefit statement." },
+                    { time: "20/04/2026 14:00:12", store: "M116 Beachwalk", trainer: "Dinda Audina", participant: "I Gusti Ayu Dwi Antari", topic: "Demo iPad", score: 90, comment: "Mendemokan fitur multitasking iPadOS dengan sangat lancar." }
+                ],
+                pnrList: [
+                    { time: "02/10/2025 12:20:43", store: "M116 Beachwalk", trainer: "Dinda Audina", participant: "Dicky Doviantoro", module: "Selling Skill Roleplay How to Sell iPad", type: "In-Store Coaching", status: "Planning", pre: "None", post: "None", hours: "1.5" },
+                    { time: "05/10/2025 14:00:00", store: "M116 Beachwalk", trainer: "Dinda Audina", participant: "I Nyoman Angga Aditya", module: "macOS Starter Guide", type: "In-Store Coaching", status: "Delivered", pre: "70", post: "95", hours: "1.5" }
                 ]
             },
-            amanda: {
-                employeeName: "Amanda Amelia",
-                store: "M236 Digimap Palu Grand Mall",
-                typeStore: "AAR",
-                nik: "23022856",
-                workExperience: "3 Tahun 0 Bulan 25 Hari",
-                totalEmployee: 6,
-                targetMonthly: 80,
-                currentProgress: 72,
-                pct: "90%",
-                staffList: [
-                    { no: 1, store: "M236 Palu Grand", name: "Muhidin Ismail", nik: "23014490", exp: "3 Thn 3 Bln 28 Hr", email: "muhidin.digimap@gmail.com", pos: "Supervisor", dates: [0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], total: 3 },
-                    { no: 2, store: "M236 Palu Grand", name: "Zaky Ridwan", nik: "24018230", exp: "2 Thn 0 Bln 10 Hr", email: "zaky.digimap@gmail.com", pos: "Cashier", dates: [0,0,1,0,0,1,1,0,0,0,0,0,1,0,1,1,1,0,0,1,1,1,0,1,0,1,0,1,1,0,1], total: 15 },
-                    { no: 3, store: "M236 Palu Grand", name: "Amanda Amelia", nik: "23022856", exp: "3 Thn 0 Bln 25 Hr", email: "amanda0805.digimap@gmail.com", pos: "Store Trainer", dates: [1,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,1,1,0,1,1,1,0,0,0,0], total: 11 },
-                    { no: 4, store: "M236 Palu Grand", name: "Fachrul Faiq Sultan", nik: "23022857", exp: "3 Thn 0 Bln 25 Hr", email: "fachrulsultan.digimap@gmail.com", pos: "Cashier", dates: [0,0,1,0,0,0,1,0,0,0,1,0,1,1,0,1,0,1,1,0,1,0,0,1,0,0,1,1,0,1,0], total: 13 },
-                    { no: 5, store: "M236 Palu Grand", name: "Andi Nurul Syafaruddin", nik: "23014486", exp: "3 Thn 3 Bln 28 Hr", email: "andiichal.digimap@gmail.com", pos: "Sales Staff", dates: [1,0,0,1,0,1,0,1,1,1,1,1,1,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,1], total: 16 }
+            M121: {
+                trainer: "Frandy Putra",
+                storeName: "M121 Digimap Tunjungan Plaza 3",
+                kpi: { ops: "68 Sesi", topProduct: "Macbook", ems: "92.5 Pts", pnr: "18 Jam" },
+                opsList: [
+                    { time: "01/09/2026 14:20:11", presenter: "Frandy Putra", store: "M121 Tunjungan Plaza", topic: "Mac Starter Guide & Handoff", sessions: "14:00", pax: 5, unit: 2, product: "Macbook", date: "01 September 2026" },
+                    { time: "03/09/2026 16:45:00", presenter: "Frandy Putra", store: "M121 Tunjungan Plaza", topic: "Apple Watch Health & Fitness", sessions: "16:00", pax: 4, unit: 1, product: "Apple Watch", date: "03 September 2026" }
+                ],
+                emsList: [
+                    { time: "15/04/2026 13:05:43", store: "M121 Tunjungan Plaza", trainer: "Frandy Putra", participant: "Achmad Bagas", topic: "Demo Mac", score: 100, comment: "Mendemokan fitur Handoff dengan baik dan sangat mudah dimengerti." }
+                ],
+                pnrList: [
+                    { time: "01/10/2025 18:10:00", store: "M121 Tunjungan Plaza", trainer: "Frandy Putra", participant: "Reni Purwati", module: "iPhone 17 NPI Briefing", type: "In-Store Coaching", status: "Delivered", pre: "80", post: "100", hours: "1.5" }
                 ]
             }
         };
 
-        // Switch Trainer Profile
-        function switchTrainerProfile() {
-            const key = document.getElementById('trainer-select').value;
-            const data = trainersDatabase[key];
+        // Switch Module Tab
+        function switchTab(tabId) {
+            document.querySelectorAll('.module-pane').forEach(el => el.classList.add('hidden'));
+            document.getElementById('module-' + tabId).classList.remove('hidden');
 
-            // Render Profile Card
-            document.getElementById('card-employee-name').innerText = data.employeeName;
-            document.getElementById('card-store-name').innerText = data.store;
-            document.getElementById('card-type-store').innerText = data.typeStore;
-            document.getElementById('card-nik').innerText = data.nik;
-            document.getElementById('card-work-exp').innerText = data.workExperience;
-            document.getElementById('card-total-employee').innerText = data.totalEmployee + " Orang";
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
+            });
 
-            // Render Target Metrics
-            document.getElementById('card-pct-badge').innerText = data.pct;
-            document.getElementById('card-current-progress').innerText = data.currentProgress;
-            document.getElementById('card-target-monthly').innerText = data.targetMonthly;
-            document.getElementById('card-progress-bar').style.width = data.pct;
-            document.getElementById('metric-target').innerText = data.targetMonthly;
-            document.getElementById('metric-progress').innerText = data.currentProgress;
-            document.getElementById('metric-pct').innerText = data.pct;
-
-            // Render Matrix Table
-            renderMatrixTable(data.staffList);
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
+            activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
         }
 
-        // Render Matrix Table Body
-        function renderMatrixTable(staffList) {
-            const tbody = document.getElementById('matrix-tbody');
-            tbody.innerHTML = staffList.map(s => `
-                <tr class="hover:bg-slate-800/40 transition-colors">
-                    <td class="p-2.5 sticky left-0 bg-slate-900 font-bold text-center text-slate-500 z-10">${s.no}</td>
-                    <td class="p-2.5 sticky left-10 bg-slate-900 font-semibold text-blue-400 z-10 truncate max-w-[170px]">${s.store}</td>
-                    <td class="p-2.5 sticky left-[210px] bg-slate-900 font-semibold text-slate-200 z-10 truncate max-w-[150px]">${s.name}</td>
-                    <td class="p-2.5 text-slate-400">${s.nik}</td>
-                    <td class="p-2.5 text-slate-300 truncate max-w-[140px]">${s.exp}</td>
-                    <td class="p-2.5 text-slate-400 text-[11px] truncate max-w-[180px]">${s.email}</td>
-                    <td class="p-2.5 border-r border-slate-800"><span class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 font-semibold text-[10px]">${s.pos}</span></td>
-                    
-                    ${s.dates.map(val => {
-                        let cellContent = val > 0 ? `<span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 font-bold text-[10px] shadow-sm">${val}</span>` : `<span class="text-slate-700/60">-</span>`;
-                        return `<td class="p-2 text-center border-l border-slate-800/40">${cellContent}</td>`;
-                    }).join('')}
+        // Sync Data per Selected Store
+        function syncDashboardData() {
+            const storeKey = document.getElementById('store-select').value;
+            const data = regionDatabase[storeKey] || regionDatabase['M116'];
 
-                    <td class="p-2.5 text-center font-bold text-emerald-400 bg-slate-800/60 border-l border-slate-700 text-sm">${s.total}</td>
+            // Update Header & KPI
+            document.getElementById('header-trainer-name').innerText = data.trainer;
+            document.getElementById('kpi-ops-session').innerText = data.kpi.ops;
+            document.getElementById('kpi-top-product').innerText = data.kpi.topProduct;
+            document.getElementById('kpi-ems-score').innerText = data.kpi.ems;
+            document.getElementById('kpi-pnr-hours').innerText = data.kpi.pnr;
+
+            // Render OPS Table
+            document.getElementById('ops-tbody').innerHTML = data.opsList.map(o => `
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="p-3 text-slate-400 text-[11px]">${o.time}</td>
+                    <td class="p-3 font-semibold text-white">${o.presenter}</td>
+                    <td class="p-3 text-blue-400 font-medium">${o.store}</td>
+                    <td class="p-3">${o.topic}</td>
+                    <td class="p-3 text-center"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-bold text-[10px]">${o.sessions}</span></td>
+                    <td class="p-3 text-center">${o.pax} Pelanggan</td>
+                    <td class="p-3 text-center font-bold ${o.unit > 0 ? 'text-emerald-400' : 'text-slate-500'}">${o.unit} Unit</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 font-semibold text-[10px]">${o.product}</span></td>
+                    <td class="p-3 text-slate-400">${o.date}</td>
                 </tr>
             `).join('');
+
+            // Render EMS Table
+            document.getElementById('ems-tbody').innerHTML = data.emsList.map(e => `
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="p-3 text-slate-400 text-[11px]">${e.time}</td>
+                    <td class="p-3 text-blue-400 font-medium">${e.store}</td>
+                    <td class="p-3 font-semibold text-white">${e.trainer}</td>
+                    <td class="p-3 text-slate-200">${e.participant}</td>
+                    <td class="p-3">${e.topic}</td>
+                    <td class="p-3 text-center"><span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 font-extrabold text-xs border border-emerald-500/30">${e.score}</span></td>
+                    <td class="p-3 text-slate-400 text-xs italic truncate max-w-[300px]">${e.comment}</td>
+                </tr>
+            `).join('');
+
+            // Render PNR Table
+            document.getElementById('pnr-tbody').innerHTML = data.pnrList.map(p => {
+                let statusBadge = p.status === 'Delivered' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+                return `
+                    <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="p-3 text-slate-400 text-[11px]">${p.time}</td>
+                        <td class="p-3 text-blue-400 font-medium">${p.store}</td>
+                        <td class="p-3 font-semibold text-white">${p.trainer}</td>
+                        <td class="p-3 text-slate-200">${p.participant}</td>
+                        <td class="p-3 font-medium">${p.module}</td>
+                        <td class="p-3 text-slate-400">${p.type}</td>
+                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold border ${statusBadge}">${p.status}</span></td>
+                        <td class="p-3 text-center text-slate-400">${p.pre}</td>
+                        <td class="p-3 text-center font-bold text-emerald-400">${p.post}</td>
+                        <td class="p-3 text-center font-bold text-amber-400">${p.hours}h</td>
+                    </tr>
+                `;
+            }).join('');
 
             lucide.createIcons();
         }
 
-        // Live Filter Search Staff
-        function filterStaffMatrix() {
-            const query = document.getElementById('staff-search-input').value.toLowerCase();
-            const rows = document.querySelectorAll('#matrix-tbody tr');
+        // Live Search Filter
+        function filterTable(tbodyId, query) {
+            const rows = document.querySelectorAll(`#${tbodyId} tr`);
             rows.forEach(row => {
                 const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
+                row.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
             });
         }
 
-        // Initialize on Load
+        // Init on DOM Content Loaded
         window.addEventListener('DOMContentLoaded', () => {
-            switchTrainerProfile();
+            syncDashboardData();
         });
     </script>
 </body>
