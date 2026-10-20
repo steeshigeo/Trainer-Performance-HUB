@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digimap East Region - Complete Store Directory Dashboard</title>
+    <title>Digimap East Region - Staff Activity Matching Dashboard</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,70 +37,26 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- TOP HEADER WITH ALL STORES -->
+    <!-- TOP HEADER -->
     <header class="h-16 bg-slate-900/90 glass-panel border-b border-slate-800 px-6 flex items-center justify-between sticky top-0 z-40">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/30">
                 DG
             </div>
             <div>
-                <h1 class="font-bold text-sm tracking-tight text-slate-100">Digimap Region Enterprise Training Hub</h1>
-                <p class="text-[11px] text-slate-400">Integrated Dashboard & Full Store Directory (47 Stores)</p>
+                <h1 class="font-bold text-sm tracking-tight text-slate-100">Digimap East Region Training Dashboard</h1>
+                <p class="text-[11px] text-slate-400">Activity Matching Engine (OPS, EMS, and PNR Integration)</p>
             </div>
         </div>
 
-        <!-- Global Selectors (All Stores Option) -->
+        <!-- Global Selectors -->
         <div class="flex items-center gap-3">
             <div class="flex items-center gap-2 bg-slate-800/80 border border-slate-700/80 rounded-xl px-3 py-1.5">
                 <i data-lucide="store" class="w-3.5 h-3.5 text-blue-400"></i>
                 <select id="store-selector" onchange="syncDashboard()" class="bg-transparent text-xs font-bold text-slate-200 focus:outline-none cursor-pointer max-w-[280px]">
-                    <option value="M108" class="bg-slate-900">M108 Digimap Trans Studio Mall Bandung</option>
                     <option value="M116" class="bg-slate-900" selected>M116 Digimap Beachwalk Bali</option>
-                    <option value="M118" class="bg-slate-900">M118 Digimap Pondok Indah Mall 2</option>
-                    <option value="M119" class="bg-slate-900">M119 Digimap Centrepoint Medan</option>
-                    <option value="M120" class="bg-slate-900">M120 Digimap Sun Plaza Medan</option>
                     <option value="M121" class="bg-slate-900">M121 Digimap Tunjungan Plaza 3 Surabaya</option>
-                    <option value="M122" class="bg-slate-900">M122 Digimap Galaxy Mall Surabaya</option>
-                    <option value="M123" class="bg-slate-900">M123 Digimap Mall Bali Galeria</option>
-                    <option value="M124" class="bg-slate-900">M124 Digimap Pacific Place Jakarta</option>
-                    <option value="M125" class="bg-slate-900">M125 Digimap Grand Indonesia</option>
-                    <option value="M126" class="bg-slate-900">M126 Digimap Ciputra World Surabaya</option>
-                    <option value="M127" class="bg-slate-900">M127 Digimap Lotte Shopping Avenue</option>
-                    <option value="M128" class="bg-slate-900">M128 Digimap Paris Van Java Bandung</option>
-                    <option value="M129" class="bg-slate-900">M129 Digimap Cirebon Superblock Mall</option>
-                    <option value="M130" class="bg-slate-900">M130 Digimap Sunset Road Bali</option>
-                    <option value="M133" class="bg-slate-900">M133 Digimap Resinda Park Mall Karawang</option>
-                    <option value="M201" class="bg-slate-900">M201 Digimap Kota Kasablanka</option>
-                    <option value="M205" class="bg-slate-900">M205 Digimap 23 Paskal Bandung</option>
-                    <option value="M214" class="bg-slate-900">M214 Digimap AEON Mall Sentul City</option>
-                    <option value="M215" class="bg-slate-900">M215 Digimap Solo Paragon</option>
-                    <option value="M217" class="bg-slate-900">M217 Digimap Blok M Plaza</option>
-                    <option value="M220" class="bg-slate-900">M220 Digimap Malioboro Mall Jogja</option>
-                    <option value="M221" class="bg-slate-900">M221 Digimap DP Mall Semarang</option>
-                    <option value="M222" class="bg-slate-900">M222 Digimap Paragon Mall Semarang</option>
-                    <option value="M223" class="bg-slate-900">M223 Digimap Mall Olympic Garden Malang</option>
-                    <option value="M225" class="bg-slate-900">M225 Digimap Citimall Dumai</option>
-                    <option value="M226" class="bg-slate-900">M226 Digimap Ambon City Center</option>
-                    <option value="M228" class="bg-slate-900">M228 Digimap Palembang Icon</option>
-                    <option value="M229" class="bg-slate-900">M229 Digimap Trans Icon Surabaya</option>
-                    <option value="M232" class="bg-slate-900">M232 Digimap Pakuwon Mall Solo</option>
-                    <option value="M234" class="bg-slate-900">M234 Digimap Citra Grand Cibubur</option>
                     <option value="M236" class="bg-slate-900">M236 Digimap Palu Grand Mall</option>
-                    <option value="M239" class="bg-slate-900">M239 Digimap Icon Bali Mall</option>
-                    <option value="M244" class="bg-slate-900">M244 Digimap Java Supermall Semarang</option>
-                    <option value="M246" class="bg-slate-900">M246 Digimap Malang Town Square</option>
-                    <option value="M248" class="bg-slate-900">M248 Digimap Suncity Mall Sidoarjo</option>
-                    <option value="M250" class="bg-slate-900">M250 Digimap Living World Pekanbaru</option>
-                    <option value="M251" class="bg-slate-900">M251 Digimap The Kings Shopping Centre Bandung</option>
-                    <option value="M253" class="bg-slate-900">M253 Digimap Plaza Surabaya</option>
-                    <option value="M257" class="bg-slate-900">M257 Digimap City Plaza Jatinegara</option>
-                    <option value="M258" class="bg-slate-900">M258 Digimap Lippo Plaza Manado</option>
-                    <option value="M260" class="bg-slate-900">M260 Digimap Kudus Extension Mall</option>
-                    <option value="M263" class="bg-slate-900">M263 Digimap Citimall Sampit</option>
-                    <option value="M268" class="bg-slate-900">M268 Digimap Diana Mall Timika</option>
-                    <option value="M269" class="bg-slate-900">M269 Digimap Tenth Avenue Surabaya</option>
-                    <option value="M272" class="bg-slate-900">M272 Digimap Kota Baru Parahyangan</option>
-                    <option value="M274" class="bg-slate-900">M274 Digimap Duta Mall Banjarmasin</option>
                 </select>
             </div>
         </div>
@@ -109,7 +65,7 @@
     <!-- TAB NAVIGATION BAR -->
     <nav class="bg-slate-900/70 border-b border-slate-800 px-6 py-2.5 flex items-center gap-2 sticky top-16 z-30 glass-panel overflow-x-auto">
         <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-tab px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/30">
-            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard Utama
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard & Matriks Harian
         </button>
         <button onclick="switchTab('ops')" id="btn-ops" class="nav-tab px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
             <i data-lucide="presentation" class="w-4 h-4"></i> Log Open Studio (OPS)
@@ -120,18 +76,15 @@
         <button onclick="switchTab('pnr')" id="btn-pnr" class="nav-tab px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
             <i data-lucide="book-open-check" class="w-4 h-4"></i> Plan & Review (PNR)
         </button>
-        <button onclick="switchTab('dbs')" id="btn-dbs" class="nav-tab px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
-            <i data-lucide="users" class="w-4 h-4"></i> Database Staff (DBS)
-        </button>
     </nav>
 
     <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-1 p-6 space-y-6 max-w-[1800px] mx-auto w-full">
 
-        <!-- TAB 1: DASHBOARD -->
+        <!-- TAB 1: DASHBOARD & MATRIKS HARIAN -->
         <section id="pane-dashboard" class="pane-content space-y-6">
+            <!-- Top Profile Card -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Trainer Bio -->
                 <div class="lg:col-span-4 bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
@@ -147,68 +100,31 @@
                                 <p id="info-store-name" class="text-xs text-slate-400">M116 Digimap Beachwalk Bali</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800 text-xs mt-4">
-                            <div class="bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
-                                <span class="text-[10px] text-slate-400 block font-medium">NIK</span>
-                                <strong id="info-nik" class="text-slate-200">23005222</strong>
-                            </div>
-                            <div class="bg-slate-800/40 p-2.5 rounded-xl border border-slate-800">
-                                <span class="text-[10px] text-slate-400 block font-medium">Total Employee</span>
-                                <strong id="info-total-emp" class="text-emerald-400">8 Orang</strong>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Open Studio Target & Progress -->
+                <!-- Progress Bar Card -->
                 <div class="lg:col-span-8 bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                                    <i data-lucide="target" class="w-4 h-4 text-blue-400"></i> Open Studio Target Activity Monthly
-                                </h3>
-                                <p class="text-xs text-slate-400">Target dan realisasi aktivitas bulanan store terpilih</p>
-                            </div>
-                            <span id="info-pct-badge" class="text-xl font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-2xl">75%</span>
-                        </div>
-                        <div class="space-y-2 my-4">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span class="text-slate-400">Current Progress: <strong id="info-progress" class="text-white">60</strong> Activity</span>
-                                <span class="text-slate-400">Target Monthly: <strong id="info-target" class="text-slate-200">80</strong> Activity</span>
-                            </div>
-                            <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden p-0.5 border border-slate-700/50">
-                                <div id="info-progress-bar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-full rounded-full transition-all duration-1000" style="width: 75%;"></div>
-                            </div>
-                        </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="target" class="w-4 h-4 text-blue-400"></i> Open Studio Target Activity Monthly
+                        </h3>
+                        <span id="info-pct-badge" class="text-xl font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-2xl">75%</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800 text-center">
-                        <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 uppercase font-bold">Target Monthly</span>
-                            <p id="box-target" class="text-lg font-bold text-slate-200 mt-1">80</p>
-                        </div>
-                        <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 uppercase font-bold">Current Progress</span>
-                            <p id="box-progress" class="text-lg font-bold text-blue-400 mt-1">60</p>
-                        </div>
-                        <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
-                            <span class="text-[10px] text-slate-400 uppercase font-bold">Achievement</span>
-                            <p id="box-pct" class="text-lg font-bold text-emerald-400 mt-1">75%</p>
+                    <div class="space-y-2 my-2">
+                        <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden p-0.5 border border-slate-700/50">
+                            <div id="info-progress-bar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-full rounded-full transition-all duration-1000" style="width: 75%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Daily Matrix Table (01 - 31) -->
+            <!-- Daily Matrix Table with Clickable Staff Names -->
             <div class="bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
                     <div>
-                        <h3 class="font-bold text-sm text-white">Matriks Aktivitas Harian Staff (01 - 31)</h3>
-                        <p class="text-xs text-slate-400">Pencatatan persis per tanggal sesuai lembar kerja Dashboard</p>
-                    </div>
-                    <div class="relative w-full sm:w-72">
-                        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500"></i>
-                        <input type="text" oninput="filterTable('matrix-tbody', this.value)" placeholder="Cari nama staff / NIK..." class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-200">
+                        <h3 class="font-bold text-sm text-white">Matriks Aktivitas Harian Staff (Klik Nama Staff untuk Detail Matched Activity)</h3>
+                        <p class="text-xs text-slate-400">Klik pada nama staf untuk melihat detail aktivitas terintegrasi di OPS, EMS, dan PNR</p>
                     </div>
                 </div>
                 <div class="overflow-x-auto rounded-2xl border border-slate-800">
@@ -217,10 +133,9 @@
                             <tr class="bg-slate-900 text-slate-400 text-[10px] uppercase font-semibold border-b border-slate-800">
                                 <th class="p-2.5 sticky left-0 bg-slate-900 z-20 text-center w-10">No</th>
                                 <th class="p-2.5 sticky left-10 bg-slate-900 z-20 min-w-[170px]">Store</th>
-                                <th class="p-2.5 sticky left-[210px] bg-slate-900 z-20 min-w-[150px]">Nama</th>
+                                <th class="p-2.5 sticky left-[210px] bg-slate-900 z-20 min-w-[150px]">Nama (Klik untuk Detail)</th>
                                 <th class="p-2.5 min-w-[90px]">NIK</th>
                                 <th class="p-2.5 min-w-[130px]">Work Exp</th>
-                                <th class="p-2.5 min-w-[170px]">SEED Email</th>
                                 <th class="p-2.5 min-w-[110px] border-r border-slate-800">Positions</th>
                                 <script>
                                     for(let d=1; d<=31; d++) {
@@ -237,7 +152,7 @@
             </div>
         </section>
 
-        <!-- OTHER TABS -->
+        <!-- TAB 2: OPS -->
         <section id="pane-ops" class="pane-content hidden space-y-6">
             <div class="bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
                 <h3 class="font-bold text-sm text-white">Log Detail Sesi Open Studio (OPS)</h3>
@@ -254,6 +169,7 @@
             </div>
         </section>
 
+        <!-- TAB 3: EMS -->
         <section id="pane-ems" class="pane-content hidden space-y-6">
             <div class="bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
                 <h3 class="font-bold text-sm text-white">Log Assessment & Evaluasi EMS Coaching</h3>
@@ -261,7 +177,7 @@
                     <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
                         <thead>
                             <tr class="bg-slate-900 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800">
-                                <th class="p-3">Timestamp</th><th class="p-3">Store</th><th class="p-3">Trainer Name</th><th class="p-3">Participants Name</th><th class="p-3">Topic</th><th class="p-3 text-center">Score</th><th class="p-3 min-w-[250px]">Any Comment</th>
+                                <th class="p-3">Timestamp</th><th class="p-3">Store</th><th class="p-3">Trainer Name</th><th class="p-3">Participants Name</th><th class="p-3">Topic</th><th class="p-3 text-center">Score</th><th class="p-3">Any Comment</th>
                             </tr>
                         </thead>
                         <tbody id="ems-tbody" class="divide-y divide-slate-800/60 font-medium"></tbody>
@@ -270,6 +186,7 @@
             </div>
         </section>
 
+        <!-- TAB 4: PNR -->
         <section id="pane-pnr" class="pane-content hidden space-y-6">
             <div class="bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
                 <h3 class="font-bold text-sm text-white">Plan and Review (PNR) Tracker</h3>
@@ -286,43 +203,50 @@
             </div>
         </section>
 
-        <section id="pane-dbs" class="pane-content hidden space-y-6">
-            <div class="bg-slate-900/80 glass-panel p-6 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
-                <h3 class="font-bold text-sm text-white">Direktori Database Staff (DBS & Pemadanan Static)</h3>
-                <div class="overflow-x-auto rounded-2xl border border-slate-800">
-                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
-                        <thead>
-                            <tr class="bg-slate-900 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800">
-                                <th class="p-3 text-center w-12">No</th><th class="p-3">Store</th><th class="p-3">Nama</th><th class="p-3">NIK</th><th class="p-3">Work Experience</th><th class="p-3">SEED Email</th><th class="p-3">Positions</th><th class="p-3">RH</th><th class="p-3">AM</th><th class="p-3">Type Store</th><th class="p-3">Trainer HO</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dbs-tbody" class="divide-y divide-slate-800/60 font-medium"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
     </main>
+
+    <!-- STAFF MATCHED ACTIVITY MODAL -->
+    <div id="staff-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-2xl w-full space-y-6 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div>
+                    <h3 id="modal-staff-name" class="font-bold text-base text-white">Rincian Aktivitas Staff</h3>
+                    <p id="modal-staff-info" class="text-xs text-slate-400">Matched records across OPS, EMS, and PNR</p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+
+            <div id="modal-content" class="space-y-4 text-xs max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Dynamic Content injected by JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- JS ENGINE -->
     <script>
         lucide.createIcons();
 
-        // Sample store data mapped to all 47 stores dynamically
-        const storeDB = {
+        const database = {
             M116: {
                 trainer: "Dinda Audina",
                 storeName: "M116 Digimap Beachwalk Bali",
                 typeStore: "APR",
                 nik: "23005222",
-                totalEmp: 8,
-                target: 80,
-                progress: 60,
-                pct: "75%",
                 staffList: [
-                    { no: 1, store: "M116 Beachwalk", name: "Muhammad Fachrizal Adam", nik: "25003371", exp: "1 Thn 8 Bln", email: "muhammadfachrizaladam@gmail.com", pos: "Supervisor", dates: Array(31).fill(0), total: 0 },
-                    { no: 2, store: "M116 Beachwalk", name: "Dinda Audina", nik: "23005222", exp: "3 Thn 7 Bln", email: "dindaaudina.digimap@gmail.com", pos: "Store Trainer", dates: Array(31).fill(0), total: 0 },
-                    { no: 3, store: "M116 Beachwalk", name: "I Nyoman Angga Aditya", nik: "23007058", exp: "3 Thn 7 Bln", email: "anggaaditya.digimap@gmail.com", pos: "Cashier", dates: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4], total: 5 }
+                    { no: 1, store: "M116 Beachwalk", name: "Dinda Audina", nik: "23005222", exp: "3 Thn 7 Bln", pos: "Store Trainer", dates: Array(31).fill(0), total: 0 },
+                    { no: 2, store: "M116 Beachwalk", name: "I Nyoman Angga Aditya", nik: "23007058", exp: "3 Thn 7 Bln", pos: "Cashier", dates: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4], total: 5 },
+                    { no: 3, store: "M116 Beachwalk", name: "I Gusti Ayu Dwi Antari", nik: "26031619", exp: "5 Thn 6 Bln", pos: "Cashier", dates: [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0], total: 3 }
+                ],
+                opsList: [
+                    { presenter: "Dinda Audina", time: "02/09/2026", topic: "Smart Script", pax: 3, unit: 1, product: "iPhone" },
+                    { presenter: "I Nyoman Angga Aditya", time: "05/09/2026", topic: "Notifications on Apple Watch", pax: 2, unit: 0, product: "Apple Watch" }
+                ],
+                emsList: [
+                    { participant: "I Nyoman Angga Aditya", time: "16/04/2026", trainer: "Dinda Audina", topic: "Demo Apple Watch", score: 80, comment: "Kurang lancar dalam membuat benefit statement." },
+                    { participant: "I Gusti Ayu Dwi Antari", time: "20/04/2026", trainer: "Dinda Audina", topic: "Demo iPad", score: 90, comment: "Mendemokan fitur multitasking iPadOS dengan sangat lancar." }
+                ],
+                pnrList: [
+                    { participant: "I Nyoman Angga Aditya", time: "05/10/2025", trainer: "Dinda Audina", module: "macOS Starter Guide", status: "Delivered", hours: "1.5" }
                 ]
             }
         };
@@ -335,37 +259,22 @@
                 btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
                 btn.classList.add('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
             });
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
-            activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
+            document.getElementById('btn-' + tabId).classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
         }
 
         function syncDashboard() {
-            const storeKey = document.getElementById('store-selector').value;
-            const data = storeDB[storeKey] || storeDB['M116'];
-
+            const data = database['M116'];
             document.getElementById('info-trainer-name').innerText = data.trainer;
             document.getElementById('info-store-name').innerText = data.storeName;
-            document.getElementById('info-type-store').innerText = data.typeStore;
-            document.getElementById('info-nik').innerText = data.nik;
-            document.getElementById('info-total-emp').innerText = data.totalEmp + " Orang";
-            document.getElementById('info-pct-badge').innerText = data.pct;
-            document.getElementById('info-progress').innerText = data.progress;
-            document.getElementById('info-target').innerText = data.target;
-            document.getElementById('info-progress-bar').style.width = data.pct;
-            document.getElementById('box-target').innerText = data.target;
-            document.getElementById('box-progress').innerText = data.progress;
-            document.getElementById('box-pct').innerText = data.pct;
 
             document.getElementById('matrix-tbody').innerHTML = data.staffList.map(s => `
                 <tr class="hover:bg-slate-800/40 transition-colors">
                     <td class="p-2.5 sticky left-0 bg-slate-900 font-bold text-center text-slate-500 z-10">${s.no}</td>
-                    <td class="p-2.5 sticky left-10 bg-slate-900 font-semibold text-blue-400 z-10 truncate max-w-[170px]">${s.store}</td>
-                    <td class="p-2.5 sticky left-[210px] bg-slate-900 font-semibold text-slate-200 z-10 truncate max-w-[150px]">${s.name}</td>
+                    <td class="p-2.5 sticky left-10 bg-slate-900 font-semibold text-blue-400 z-10">${s.store}</td>
+                    <td class="p-2.5 sticky left-[210px] bg-slate-900 font-bold text-slate-100 z-10 cursor-pointer hover:text-blue-400 underline" onclick="showStaffDetail('${s.name}')">${s.name}</td>
                     <td class="p-2.5 text-slate-400">${s.nik}</td>
                     <td class="p-2.5 text-slate-300">${s.exp}</td>
-                    <td class="p-2.5 text-slate-400 text-[11px]">${s.email}</td>
-                    <td class="p-2.5 border-r border-slate-800"><span class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 font-semibold text-[10px]">${s.pos}</span></td>
+                    <td class="p-2.5 border-r border-slate-800"><span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold text-[10px]">${s.pos}</span></td>
                     ${s.dates.map(v => `<td class="p-2 text-center border-l border-slate-800/40">${v > 0 ? `<span class="inline-flex items-center justify-center w-5 h-5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">${v}</span>` : `<span class="text-slate-700">-</span>`}</td>`).join('')}
                     <td class="p-2.5 text-center font-bold text-emerald-400 bg-slate-800/60 border-l border-slate-700">${s.total}</td>
                 </tr>
@@ -374,11 +283,40 @@
             lucide.createIcons();
         }
 
-        function filterTable(tbodyId, query) {
-            const rows = document.querySelectorAll(`#${tbodyId} tr`);
-            rows.forEach(row => {
-                row.style.display = row.innerText.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
-            });
+        function showStaffDetail(staffName) {
+            const data = database['M116'];
+            document.getElementById('modal-staff-name').innerText = staffName;
+
+            const opsMatched = data.opsList.filter(o => o.presenter === staffName);
+            const emsMatched = data.emsList.filter(e => e.participant === staffName);
+            const pnrMatched = data.pnrList.filter(p => p.participant === staffName);
+
+            let html = `
+                <div class="space-y-3">
+                    <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
+                        <h4 class="font-bold text-blue-400 mb-1 flex items-center gap-1.5"><i data-lucide="presentation" class="w-3.5 h-3.5"></i> Open Studio (OPS) Presenter Records (${opsMatched.length})</h4>
+                        ${opsMatched.length > 0 ? opsMatched.map(o => `<p class="text-slate-300">• ${o.time} - Topik: <strong>${o.topic}</strong> (${o.pax} Pax, ${o.unit} Unit Sold:${o.product})</p>`).join('') : '<p class="text-slate-500 italic">Belum ada sesi Open Studio sebagai presenter.</p>'}
+                    </div>
+
+                    <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
+                        <h4 class="font-bold text-indigo-400 mb-1 flex items-center gap-1.5"><i data-lucide="award" class="w-3.5 h-3.5"></i> EMS Coaching Assessment (${emsMatched.length})</h4>
+                        ${emsMatched.length > 0 ? emsMatched.map(e => `<p class="text-slate-300">• ${e.time} - Topik: <strong>${e.topic}</strong> (Score: <span class="text-emerald-400 font-bold">${e.score}</span>) - <em>"${e.comment}"</em></p>`).join('') : '<p class="text-slate-500 italic">Belum ada catatan EMS coaching.</p>'}
+                    </div>
+
+                    <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-800">
+                        <h4 class="font-bold text-amber-400 mb-1 flex items-center gap-1.5"><i data-lucide="book-open-check" class="w-3.5 h-3.5"></i> PNR Training Sessions (${pnrMatched.length})</h4>
+                        ${pnrMatched.length > 0 ? pnrMatched.map(p => `<p class="text-slate-300">• ${p.time} - Modul: <strong>${p.module}</strong> (Status: <span class="text-emerald-400 font-bold">${p.status}</span>,${p.hours}h)</p>`).join('') : '<p class="text-slate-500 italic">Belum ada sesi PNR training.</p>'}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            document.getElementById('staff-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('staff-modal').classList.add('hidden');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
